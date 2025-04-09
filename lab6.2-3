@@ -1,0 +1,98 @@
+using System;
+namespace Lab6._23
+{
+    class Check
+    {
+        static public uint Inputrubl()
+        {
+            bool ok = false;
+            uint s=0;
+            do
+            {
+                try
+                {
+                    s = Convert.ToUInt32(Console.ReadLine());
+                    ok = true;
+                }
+                catch
+                {
+                    Console.Write("Ошибка. Введите натуральное число:");
+                }
+            } while (!ok);
+            return s;
+        }
+        static public byte Inputkop()
+        {
+            bool ok = false;
+            byte s = 0;
+            do
+            {
+                try
+                {
+                    s = Convert.ToByte(Console.ReadLine());
+                    if (s < 100) ok = true;
+                    else Console.Write("Ошибка. Введите натуральное число меньше 100:");
+                }
+                catch
+                {
+                    Console.Write("Ошибка. Введите натуральное число меньше 100:");
+                }
+            } while (!ok);
+            return s;
+        }
+    }
+    class Money
+    {
+        private uint rubles;
+        private byte kopeks;
+        public Money()
+        {
+            Console.Write("Введите рубли:");
+            rubles = Check.Inputrubl();
+            Console.Write("Введите копейки:");
+            kopeks = Check.Inputkop();
+        }
+        public void Printer()
+        {
+            Console.WriteLine($"Баланс: {rubles} рублей {kopeks} копеек");
+        }
+        public void schet(uint n)
+        {
+            rubles = rubles - (n / 100);
+            byte kopekss = (byte)(n%100);
+            if (kopeks >= kopekss) kopeks = (byte)(kopeks - kopekss);
+            else 
+            {
+                kopeks = (byte)(100 + kopeks - kopekss);
+                rubles--;
+            }
+        }
+        public void plus() { kopeks++; }
+        public void minus() { kopeks--; }
+        public static explicit operator uint(Money m) 
+        {
+            return m.rubles;
+        }
+        public static implicit operator bool(Money m)
+        {
+            if ((m.rubles == 0) && (m.kopeks == 0)) return false;
+            else return true;
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Money m = new Money();
+            m.Printer();
+            Console.Write("Введите вычитаемое число копеек:");
+            uint n = Check.Inputrubl();
+            m.schet(n);
+            m.Printer();
+            uint a = (uint) m;
+            Console.WriteLine($"{a} рублей на балансе");
+            bool b = m;
+            Console.WriteLine($"Деньги на балансе есть? {b}");
+        }
+    }
+}
