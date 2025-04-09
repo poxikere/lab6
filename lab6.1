@@ -1,0 +1,54 @@
+using System;
+namespace Lab6._1
+{
+    class Check
+    {
+        static public bool Input()                                                                                        
+        {
+            bool ok = false;
+            string s;
+            do
+            {
+                s = Console.ReadLine();
+                if (s=="да" || s=="нет") ok = true; 
+                else Console.WriteLine("Ошибка. Введите да или нет.");
+            } while (!ok);
+            if (s == "да") return true;
+            else return false;
+        }
+    }
+    class Progulka
+    {
+        private bool pogoda;
+        private bool bol;
+        public Progulka()
+        {
+            Console.Write("На улице хорошая погода?(да или нет):");
+            pogoda = Check.Input();
+            Console.Write("У тебя болят ноги?(да или нет):");
+            bol = Check.Input();
+        }
+        public bool Impl()
+        {
+            return pogoda && !bol;
+        }
+        public void Printer()
+        {
+            if (Impl()) Console.WriteLine("Отпарвляйся на прогулку");
+            else Console.WriteLine("Лучше сиди дома");
+        }
+        public override string ToString()
+        {
+            return $"1){pogoda}, 2){bol}";
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Progulka p = new Progulka();
+            p.Printer();
+            Console.WriteLine(p.ToString());
+        }
+    }
+}
