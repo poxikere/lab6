@@ -19,18 +19,18 @@ namespace Lab6._1
     }
     class Progulka
     {
-        private bool pogoda;
-        private bool bol;
+        private bool _pogoda;
+        private bool _bol;
         public Progulka()
         {
             Console.Write("На улице хорошая погода?(да или нет):");
-            pogoda = Check.Input();
+            _pogoda = Check.Input();
             Console.Write("У тебя болят ноги?(да или нет):");
-            bol = Check.Input();
+            _bol = Check.Input();
         }
         public bool Impl()
         {
-            return pogoda && !bol;
+            return _pogoda && !_bol;
         }
         public void Printer()
         {
@@ -39,7 +39,7 @@ namespace Lab6._1
         }
         public override string ToString()
         {
-            return $"1){pogoda}, 2){bol}";
+            return $"1){_pogoda}, 2){_bol}";
         }
     }
     class Program
