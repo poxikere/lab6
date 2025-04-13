@@ -43,39 +43,55 @@ namespace Lab6._23
     }
     class Money
     {
-        private uint rubles;
-        private byte kopeks;
+        private uint _rubles;
+        private byte _kopeks;
         public Money()
         {
             Console.Write("Введите рубли:");
-            rubles = Check.Inputrubl();
+            _rubles = Check.Inputrubl();
             Console.Write("Введите копейки:");
-            kopeks = Check.Inputkop();
+            _kopeks = Check.Inputkop();
         }
         public void Printer()
         {
-            Console.WriteLine($"Баланс: {rubles} рублей {kopeks} копеек");
+            Console.WriteLine($"Баланс: {_rubles} рублей {_kopeks} копеек");
         }
         public void schet(uint n)
         {
-            rubles = rubles - (n / 100);
-            byte kopekss = (byte)(n%100);
-            if (kopeks >= kopekss) kopeks = (byte)(kopeks - kopekss);
+            _rubles = _rubles - (n / 100);
+            byte kopeks = (byte)(n%100);
+            if (_kopeks >= kopeks) _kopeks = (byte)(_kopeks - kopeks);
             else 
             {
-                kopeks = (byte)(100 + kopeks - kopekss);
-                rubles--;
+                _kopeks = (byte)(100 + _kopeks - kopeks);
+                _rubles--;
             }
         }
-        public void plus() { kopeks++; }
-        public void minus() { kopeks--; }
+        public void plus() 
+        {
+            if (_kopeks==99)
+            {
+                _kopeks=0;
+                _rubles++;
+            }
+            else _kopeks++;
+        }
+        public void minus() 
+        {
+            if (_kopeks==0)
+            {
+                _kopeks=99;
+                _rubles--;
+            }
+            else _kopeks--;
+        }
         public static explicit operator uint(Money m) 
         {
-            return m.rubles;
+            return m._rubles;
         }
         public static implicit operator bool(Money m)
         {
-            if ((m.rubles == 0) && (m.kopeks == 0)) return false;
+            if ((m._rubles == 0) && (m._kopeks == 0)) return false;
             else return true;
         }
     }
